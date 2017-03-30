@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ChangeImageWindow
@@ -49,9 +50,6 @@ namespace ChangeImageWindow
             int WinCenter = 127 + (int)difCenter;
             int WinWidth = 255 + (int)difWidth;
 
-            //WinCenter = currentCenter;
-            //WinWidth = currentWidth;
-
             var wMin = WinCenter - 0.5 - (WinWidth - 1) / 2;
             var wMax = WinCenter - 0.5 + (WinWidth - 1) / 2;
             Color color;
@@ -76,7 +74,7 @@ namespace ChangeImageWindow
             buttonSaveProcessed.Enabled = true;
         }
 
-        private byte calculateColor(byte c, double wMin, double wMax, double WinCenter, double WinWidth)
+        private byte calculateColor(short c, double wMin, double wMax, double WinCenter, double WinWidth)
         {
             if (c <= wMin)
             {
@@ -145,6 +143,48 @@ namespace ChangeImageWindow
 
             textBoxMean.Text = mean.ToString();
             textBoxMeanS.Text = meanS.ToString();
+        }
+
+        private void buttonLoadRaw_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a raw file:";
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                byte[] fileBytes = File.ReadAllBytes(openFileDialog.FileName);
+                int k = 0;
+                int currentCenter = int.Parse(textBoxCenter.Text);
+                int currentWidth = int.Parse(textBoxWidth.Text);
+
+                var wMin = currentCenter - 0.5 - (currentWidth - 1) / 2;
+                var wMax = currentCenter - 0.5 + (currentWidth - 1) / 2;
+                Color color;
+
+                uint pixelPadding = uint.Parse(textBoxPixelPadding.Text);
+
+                processedBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                for (int i = 0; i < bmp.Height; i++)
+                {
+                    for (int j = 0; j < bmp.Width; j++)
+                    {
+                        short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
+                        k += 2;
+
+                        color = Color.FromArgb(
+                        calculateColor(s, wMin, wMax, currentCenter, currentWidth),
+                        calculateColor(s, wMin, wMax, currentCenter, currentWidth),
+                        calculateColor(s, wMin, wMax, currentCenter, currentWidth));
+
+                        processedBmp.SetPixel(j, i, color);
+                    }
+                }
+
+                Rectangle bounds = panelProcessed.Bounds;
+                panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
+                panelProcessed.BackgroundImage = processedBmp;
+            }
         }
     }
 }

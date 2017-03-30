@@ -30,6 +30,12 @@
         {
             this.panelImage = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxMeanS = new System.Windows.Forms.TextBox();
+            this.textBoxMean = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonCompare = new System.Windows.Forms.Button();
+            this.buttonSaveProcessed = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxWidth = new System.Windows.Forms.TextBox();
@@ -38,14 +44,11 @@
             this.labelFile = new System.Windows.Forms.Label();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.panelProcessed = new System.Windows.Forms.Panel();
-            this.buttonSaveProcessed = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
-            this.buttonCompare = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxMean = new System.Windows.Forms.TextBox();
-            this.textBoxMeanS = new System.Windows.Forms.TextBox();
+            this.buttonLoadRaw = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxPixelPadding = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +63,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxPixelPadding);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.buttonLoadRaw);
             this.panel1.Controls.Add(this.textBoxMeanS);
             this.panel1.Controls.Add(this.textBoxMean);
             this.panel1.Controls.Add(this.label4);
@@ -77,6 +83,61 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(301, 512);
             this.panel1.TabIndex = 0;
+            // 
+            // textBoxMeanS
+            // 
+            this.textBoxMeanS.Location = new System.Drawing.Point(98, 266);
+            this.textBoxMeanS.Name = "textBoxMeanS";
+            this.textBoxMeanS.Size = new System.Drawing.Size(200, 20);
+            this.textBoxMeanS.TabIndex = 7;
+            this.textBoxMeanS.Text = "400";
+            // 
+            // textBoxMean
+            // 
+            this.textBoxMean.Location = new System.Drawing.Point(98, 240);
+            this.textBoxMean.Name = "textBoxMean";
+            this.textBoxMean.Size = new System.Drawing.Size(200, 20);
+            this.textBoxMean.TabIndex = 6;
+            this.textBoxMean.Text = "40";
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(3, 265);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Mean (0-255)";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(3, 239);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Mean [0-255]";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // buttonCompare
+            // 
+            this.buttonCompare.Location = new System.Drawing.Point(3, 200);
+            this.buttonCompare.Name = "buttonCompare";
+            this.buttonCompare.Size = new System.Drawing.Size(295, 34);
+            this.buttonCompare.TabIndex = 5;
+            this.buttonCompare.Text = "Compare Images";
+            this.buttonCompare.UseVisualStyleBackColor = true;
+            this.buttonCompare.Click += new System.EventHandler(this.buttonCompare_Click);
+            // 
+            // buttonSaveProcessed
+            // 
+            this.buttonSaveProcessed.Enabled = false;
+            this.buttonSaveProcessed.Location = new System.Drawing.Point(3, 160);
+            this.buttonSaveProcessed.Name = "buttonSaveProcessed";
+            this.buttonSaveProcessed.Size = new System.Drawing.Size(295, 34);
+            this.buttonSaveProcessed.TabIndex = 4;
+            this.buttonSaveProcessed.Text = "Save Processed";
+            this.buttonSaveProcessed.UseVisualStyleBackColor = true;
+            this.buttonSaveProcessed.Click += new System.EventHandler(this.buttonSaveProcessed_Click);
             // 
             // label2
             // 
@@ -149,17 +210,6 @@
             this.panelProcessed.Size = new System.Drawing.Size(512, 512);
             this.panelProcessed.TabIndex = 1;
             // 
-            // buttonSaveProcessed
-            // 
-            this.buttonSaveProcessed.Enabled = false;
-            this.buttonSaveProcessed.Location = new System.Drawing.Point(3, 160);
-            this.buttonSaveProcessed.Name = "buttonSaveProcessed";
-            this.buttonSaveProcessed.Size = new System.Drawing.Size(295, 34);
-            this.buttonSaveProcessed.TabIndex = 4;
-            this.buttonSaveProcessed.Text = "Save Processed";
-            this.buttonSaveProcessed.UseVisualStyleBackColor = true;
-            this.buttonSaveProcessed.Click += new System.EventHandler(this.buttonSaveProcessed_Click);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.buttonLoad);
@@ -173,54 +223,37 @@
             this.buttonLoad.Location = new System.Drawing.Point(825, 3);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(253, 34);
-            this.buttonLoad.TabIndex = 8;
+            this.buttonLoad.TabIndex = 11;
             this.buttonLoad.Text = "Load Image";
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
-            // buttonCompare
+            // buttonLoadRaw
             // 
-            this.buttonCompare.Location = new System.Drawing.Point(3, 200);
-            this.buttonCompare.Name = "buttonCompare";
-            this.buttonCompare.Size = new System.Drawing.Size(295, 34);
-            this.buttonCompare.TabIndex = 5;
-            this.buttonCompare.Text = "Compare Images";
-            this.buttonCompare.UseVisualStyleBackColor = true;
-            this.buttonCompare.Click += new System.EventHandler(this.buttonCompare_Click);
+            this.buttonLoadRaw.Location = new System.Drawing.Point(3, 292);
+            this.buttonLoadRaw.Name = "buttonLoadRaw";
+            this.buttonLoadRaw.Size = new System.Drawing.Size(295, 34);
+            this.buttonLoadRaw.TabIndex = 8;
+            this.buttonLoadRaw.Text = "Load Raw File";
+            this.buttonLoadRaw.UseVisualStyleBackColor = true;
+            this.buttonLoadRaw.Click += new System.EventHandler(this.buttonLoadRaw_Click);
             // 
-            // label3
+            // label5
             // 
-            this.label3.Location = new System.Drawing.Point(3, 239);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Mean [0-255]";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.Location = new System.Drawing.Point(3, 328);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Pixel Padding";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label4
+            // textBoxPixelPadding
             // 
-            this.label4.Location = new System.Drawing.Point(3, 265);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Mean (0-255)";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBoxMean
-            // 
-            this.textBoxMean.Location = new System.Drawing.Point(98, 240);
-            this.textBoxMean.Name = "textBoxMean";
-            this.textBoxMean.Size = new System.Drawing.Size(200, 20);
-            this.textBoxMean.TabIndex = 6;
-            this.textBoxMean.Text = "40";
-            // 
-            // textBoxMeanS
-            // 
-            this.textBoxMeanS.Location = new System.Drawing.Point(98, 266);
-            this.textBoxMeanS.Name = "textBoxMeanS";
-            this.textBoxMeanS.Size = new System.Drawing.Size(200, 20);
-            this.textBoxMeanS.TabIndex = 7;
-            this.textBoxMeanS.Text = "400";
+            this.textBoxPixelPadding.Location = new System.Drawing.Point(98, 329);
+            this.textBoxPixelPadding.Name = "textBoxPixelPadding";
+            this.textBoxPixelPadding.Size = new System.Drawing.Size(200, 20);
+            this.textBoxPixelPadding.TabIndex = 10;
+            this.textBoxPixelPadding.Text = "64036";
             // 
             // MainForm
             // 
@@ -260,6 +293,9 @@
         private System.Windows.Forms.TextBox textBoxMean;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonLoadRaw;
+        private System.Windows.Forms.TextBox textBoxPixelPadding;
+        private System.Windows.Forms.Label label5;
     }
 }
 
