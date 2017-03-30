@@ -163,10 +163,7 @@ namespace ChangeImageWindow
 
                 uint pixelPadding = uint.Parse(textBoxPixelPadding.Text);
 
-                if (processedBmp == null)
-                {
-                    processedBmp = new Bitmap(bmp.Width, bmp.Height);
-                }
+                processedBmp = new Bitmap(bmp.Width, bmp.Height);
 
                 for (int i = 0; i < bmp.Height; i++)
                 {
