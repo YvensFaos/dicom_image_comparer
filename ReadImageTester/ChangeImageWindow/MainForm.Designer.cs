@@ -244,7 +244,7 @@
             this.panel2.Controls.Add(this.buttonLoad);
             this.panel2.Location = new System.Drawing.Point(12, 530);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1337, 47);
+            this.panel2.Size = new System.Drawing.Size(1337, 57);
             this.panel2.TabIndex = 2;
             // 
             // buttonLoad
@@ -263,7 +263,8 @@
             this.textBoxLog.Location = new System.Drawing.Point(3, 1);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
-            this.textBoxLog.Size = new System.Drawing.Size(816, 36);
+            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxLog.Size = new System.Drawing.Size(816, 53);
             this.textBoxLog.TabIndex = 11;
             // 
             // MainForm

@@ -22,7 +22,7 @@ namespace ChangeImageWindow
             }
             catch (FileNotFoundException)
             {
-                textBoxLog.Text = "Error loading default file: " + defaultFile + "\r\n" + textBoxLog.Text;
+                logMessage("Error loading default file: " + defaultFile, true);
             }
         }
 
@@ -37,7 +37,7 @@ namespace ChangeImageWindow
                 bmp = (Bitmap)Image.FromFile(openFileDialog.FileName);
                 openFileAtPanel(openFileDialog.FileName, panelImage, bmp);
 
-                textBoxLog.Text = "Loaded file: " + openFileDialog.FileName + "\r\n" + textBoxLog.Text;
+                logMessage("Loaded file: " + openFileDialog.FileName, true);
             }
         }
 
@@ -82,7 +82,7 @@ namespace ChangeImageWindow
             panelProcessed.BackgroundImage = processedBmp;
             buttonSaveProcessed.Enabled = true;
 
-            textBoxLog.Text = "File processed!\r\n" + textBoxLog.Text;
+            logMessage("File processed!", true);
         }
 
         private byte calculateColor(short c, double wMin, double wMax, double WinCenter, double WinWidth)
@@ -110,7 +110,7 @@ namespace ChangeImageWindow
             {
                 processedBmp.Save(saveFileDialog.FileName);
 
-                textBoxLog.Text = "File saved at: " + saveFileDialog.FileName + "\r\n" + textBoxLog.Text;
+                logMessage("File saved at: " + saveFileDialog.FileName, true);
             }
         }
 
@@ -127,7 +127,7 @@ namespace ChangeImageWindow
                 panelProcessed.BackgroundImage = processedBmp;
                 buttonSaveProcessed.Enabled = true;
 
-                textBoxLog.Text = "Loaded file: " + openFileDialog.FileName + "\r\n" + textBoxLog.Text;
+                logMessage("Loaded file: " + openFileDialog.FileName, true);
             }
         }
 
@@ -159,9 +159,11 @@ namespace ChangeImageWindow
             textBoxMean.Text = mean.ToString();
             textBoxMeanS.Text = meanS.ToString();
 
-            textBoxLog.Text = "Compared files:\r\n" +
+            string log = "Compared files:\r\n" +
                 "Mean [0-255]: " + mean.ToString() + "\r\n" +
-                "Mean (0-255): " + meanS.ToString() + "\r\n" + textBoxLog.Text;
+                "Mean (0-255): " + meanS.ToString() + "\r\n";
+
+            logMessage(log);
         }
 
         private void buttonLoadRaw_Click(object sender, EventArgs e)
@@ -172,7 +174,8 @@ namespace ChangeImageWindow
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 byte[] fileBytes = File.ReadAllBytes(openFileDialog.FileName);
-                textBoxLog.Text = "Raw file loaded: " + openFileDialog.FileName + "\r\n" + textBoxLog.Text;
+                logMessage("Raw file loaded: " + openFileDialog.FileName, true);
+
                 int k = 0;
                 int currentCenter = int.Parse(textBoxCenter.Text);
                 int currentWidth = int.Parse(textBoxWidth.Text);
@@ -205,6 +208,13 @@ namespace ChangeImageWindow
                 panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
                 panelProcessed.BackgroundImage = processedBmp;
             }
+        }
+
+        private void logMessage(string message, bool line = false)
+        {
+            string breakline = (line) ? "\r\n" : "";
+
+            textBoxLog.Text = message + breakline + textBoxLog.Text;
         }
     }
 }
