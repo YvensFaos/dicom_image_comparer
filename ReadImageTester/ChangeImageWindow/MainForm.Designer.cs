@@ -51,6 +51,7 @@
             this.buttonLoad = new System.Windows.Forms.Button();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonReloadRaw = new System.Windows.Forms.Button();
+            this.buttonRawAsGrayscale = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +66,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonRawAsGrayscale);
             this.panel1.Controls.Add(this.buttonReloadRaw);
             this.panel1.Controls.Add(this.textBoxPixelPadding);
             this.panel1.Controls.Add(this.label5);
@@ -279,6 +281,16 @@
             this.buttonReloadRaw.UseVisualStyleBackColor = true;
             this.buttonReloadRaw.Click += new System.EventHandler(this.buttonReloadRaw_Click);
             // 
+            // buttonRawAsGrayscale
+            // 
+            this.buttonRawAsGrayscale.Location = new System.Drawing.Point(3, 391);
+            this.buttonRawAsGrayscale.Name = "buttonRawAsGrayscale";
+            this.buttonRawAsGrayscale.Size = new System.Drawing.Size(295, 34);
+            this.buttonRawAsGrayscale.TabIndex = 12;
+            this.buttonRawAsGrayscale.Text = "Load Raw as Grayscale";
+            this.buttonRawAsGrayscale.UseVisualStyleBackColor = true;
+            this.buttonRawAsGrayscale.Click += new System.EventHandler(this.buttonRawAsGrayscale_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,6 +336,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Button buttonReloadRaw;
+        private System.Windows.Forms.Button buttonRawAsGrayscale;
     }
 }
 

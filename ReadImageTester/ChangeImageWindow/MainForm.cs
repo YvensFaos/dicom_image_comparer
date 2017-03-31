@@ -180,6 +180,72 @@ namespace ChangeImageWindow
                 logMessage("Raw file loaded: " + openFileDialog.FileName, true);
                 logMessage("Raw loaded with " + textBoxCenter.Text + " " + textBoxWidth.Text, true);
 
+                readRawFile();
+
+                Rectangle bounds = panelProcessed.Bounds;
+                panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
+                panelProcessed.BackgroundImage = processedBmp;
+            }
+        }
+
+        private void readRawFile()
+        {
+            int k = 0;
+            int currentCenter = int.Parse(textBoxCenter.Text);
+            int currentWidth = int.Parse(textBoxWidth.Text);
+
+            var wMin = currentCenter - 0.5 - (currentWidth - 1) / 2;
+            var wMax = currentCenter - 0.5 + (currentWidth - 1) / 2;
+            Color color;
+
+            processedBmp = new Bitmap(bmp.Width, bmp.Height);
+
+            for (int i = 0; i < bmp.Height; i++)
+            {
+                for (int j = 0; j < bmp.Width; j++)
+                {
+                    short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
+                    k += 2;
+
+                    color = Color.FromArgb(
+                    calculateColor(s, wMin, wMax, currentCenter, currentWidth),
+                    calculateColor(s, wMin, wMax, currentCenter, currentWidth),
+                    calculateColor(s, wMin, wMax, currentCenter, currentWidth));
+
+                    processedBmp.SetPixel(j, i, color);
+                }
+            }
+        }
+
+        private void logMessage(string message, bool line = false)
+        {
+            string breakline = (line) ? "\r\n" : "";
+
+            textBoxLog.Text = message + breakline + textBoxLog.Text;
+        }
+
+        private void buttonReloadRaw_Click(object sender, EventArgs e)
+        {
+            logMessage("Raw reloaded with " + textBoxCenter.Text + " " + textBoxWidth.Text, true);
+
+            readRawFile();
+
+            Rectangle bounds = panelProcessed.Bounds;
+            panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
+            panelProcessed.BackgroundImage = processedBmp;
+        }
+
+        private void buttonRawAsGrayscale_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a raw file:";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileBytes = File.ReadAllBytes(openFileDialog.FileName);
+                logMessage("Raw file loaded: " + openFileDialog.FileName, true);
+                
+
                 int k = 0;
                 int currentCenter = int.Parse(textBoxCenter.Text);
                 int currentWidth = int.Parse(textBoxWidth.Text);
@@ -211,51 +277,9 @@ namespace ChangeImageWindow
                 Rectangle bounds = panelProcessed.Bounds;
                 panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
                 panelProcessed.BackgroundImage = processedBmp;
+
+                logMessage("Raw loaded as grayscale. Max e min = " + textBoxCenter.Text + " " + textBoxWidth.Text, true);
             }
-        }
-
-        private void logMessage(string message, bool line = false)
-        {
-            string breakline = (line) ? "\r\n" : "";
-
-            textBoxLog.Text = message + breakline + textBoxLog.Text;
-        }
-
-        private void buttonReloadRaw_Click(object sender, EventArgs e)
-        {
-            int k = 0;
-            int currentCenter = int.Parse(textBoxCenter.Text);
-            int currentWidth = int.Parse(textBoxWidth.Text);
-
-            logMessage("Raw reloaded with " + textBoxCenter.Text + " " + textBoxWidth.Text, true);
-
-            var wMin = currentCenter - 0.5 - (currentWidth - 1) / 2;
-            var wMax = currentCenter - 0.5 + (currentWidth - 1) / 2;
-            Color color;
-
-            uint pixelPadding = uint.Parse(textBoxPixelPadding.Text);
-
-            processedBmp = new Bitmap(bmp.Width, bmp.Height);
-
-            for (int i = 0; i < bmp.Height; i++)
-            {
-                for (int j = 0; j < bmp.Width; j++)
-                {
-                    short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
-                    k += 2;
-
-                    color = Color.FromArgb(
-                    calculateColor(s, wMin, wMax, currentCenter, currentWidth),
-                    calculateColor(s, wMin, wMax, currentCenter, currentWidth),
-                    calculateColor(s, wMin, wMax, currentCenter, currentWidth));
-
-                    processedBmp.SetPixel(j, i, color);
-                }
-            }
-
-            Rectangle bounds = panelProcessed.Bounds;
-            panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
-            panelProcessed.BackgroundImage = processedBmp;
         }
     }
 }
