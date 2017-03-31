@@ -95,7 +95,7 @@
             this.textBoxPixelPadding.Name = "textBoxPixelPadding";
             this.textBoxPixelPadding.Size = new System.Drawing.Size(200, 20);
             this.textBoxPixelPadding.TabIndex = 10;
-            this.textBoxPixelPadding.Text = "64036";
+            this.textBoxPixelPadding.Text = "-1500";
             // 
             // label5
             // 
