@@ -30,6 +30,9 @@
         {
             this.panelImage = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxPixelPadding = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.buttonLoadRaw = new System.Windows.Forms.Button();
             this.textBoxMeanS = new System.Windows.Forms.TextBox();
             this.textBoxMean = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,9 +49,7 @@
             this.panelProcessed = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
-            this.buttonLoadRaw = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxPixelPadding = new System.Windows.Forms.TextBox();
+            this.textBoxLog = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(301, 512);
             this.panel1.TabIndex = 0;
+            // 
+            // textBoxPixelPadding
+            // 
+            this.textBoxPixelPadding.Location = new System.Drawing.Point(98, 329);
+            this.textBoxPixelPadding.Name = "textBoxPixelPadding";
+            this.textBoxPixelPadding.Size = new System.Drawing.Size(200, 20);
+            this.textBoxPixelPadding.TabIndex = 10;
+            this.textBoxPixelPadding.Text = "64036";
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(3, 328);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Pixel Padding";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // buttonLoadRaw
+            // 
+            this.buttonLoadRaw.Location = new System.Drawing.Point(3, 292);
+            this.buttonLoadRaw.Name = "buttonLoadRaw";
+            this.buttonLoadRaw.Size = new System.Drawing.Size(295, 34);
+            this.buttonLoadRaw.TabIndex = 8;
+            this.buttonLoadRaw.Text = "Load Raw File";
+            this.buttonLoadRaw.UseVisualStyleBackColor = true;
+            this.buttonLoadRaw.Click += new System.EventHandler(this.buttonLoadRaw_Click);
             // 
             // textBoxMeanS
             // 
@@ -212,10 +240,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.textBoxLog);
             this.panel2.Controls.Add(this.buttonLoad);
             this.panel2.Location = new System.Drawing.Point(12, 530);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1337, 47);
+            this.panel2.Size = new System.Drawing.Size(1337, 57);
             this.panel2.TabIndex = 2;
             // 
             // buttonLoad
@@ -228,32 +257,15 @@
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
-            // buttonLoadRaw
+            // textBoxLog
             // 
-            this.buttonLoadRaw.Location = new System.Drawing.Point(3, 292);
-            this.buttonLoadRaw.Name = "buttonLoadRaw";
-            this.buttonLoadRaw.Size = new System.Drawing.Size(295, 34);
-            this.buttonLoadRaw.TabIndex = 8;
-            this.buttonLoadRaw.Text = "Load Raw File";
-            this.buttonLoadRaw.UseVisualStyleBackColor = true;
-            this.buttonLoadRaw.Click += new System.EventHandler(this.buttonLoadRaw_Click);
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(3, 328);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 20);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Pixel Padding";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBoxPixelPadding
-            // 
-            this.textBoxPixelPadding.Location = new System.Drawing.Point(98, 329);
-            this.textBoxPixelPadding.Name = "textBoxPixelPadding";
-            this.textBoxPixelPadding.Size = new System.Drawing.Size(200, 20);
-            this.textBoxPixelPadding.TabIndex = 10;
-            this.textBoxPixelPadding.Text = "64036";
+            this.textBoxLog.BackColor = System.Drawing.SystemColors.Info;
+            this.textBoxLog.Location = new System.Drawing.Point(3, 1);
+            this.textBoxLog.Multiline = true;
+            this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxLog.Size = new System.Drawing.Size(816, 53);
+            this.textBoxLog.TabIndex = 11;
             // 
             // MainForm
             // 
@@ -264,11 +276,13 @@
             this.Controls.Add(this.panelProcessed);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelImage);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.Text = "Main Window";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -296,6 +310,7 @@
         private System.Windows.Forms.Button buttonLoadRaw;
         private System.Windows.Forms.TextBox textBoxPixelPadding;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxLog;
     }
 }
 
