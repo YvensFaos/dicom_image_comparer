@@ -50,6 +50,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.buttonReloadRaw = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonReloadRaw);
             this.panel1.Controls.Add(this.textBoxPixelPadding);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.buttonLoadRaw);
@@ -267,6 +269,16 @@
             this.textBoxLog.Size = new System.Drawing.Size(816, 53);
             this.textBoxLog.TabIndex = 11;
             // 
+            // buttonReloadRaw
+            // 
+            this.buttonReloadRaw.Location = new System.Drawing.Point(3, 351);
+            this.buttonReloadRaw.Name = "buttonReloadRaw";
+            this.buttonReloadRaw.Size = new System.Drawing.Size(295, 34);
+            this.buttonReloadRaw.TabIndex = 11;
+            this.buttonReloadRaw.Text = "Reload Raw File";
+            this.buttonReloadRaw.UseVisualStyleBackColor = true;
+            this.buttonReloadRaw.Click += new System.EventHandler(this.buttonReloadRaw_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,6 +323,7 @@
         private System.Windows.Forms.TextBox textBoxPixelPadding;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxLog;
+        private System.Windows.Forms.Button buttonReloadRaw;
     }
 }
 
