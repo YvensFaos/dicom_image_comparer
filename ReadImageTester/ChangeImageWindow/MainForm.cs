@@ -31,7 +31,7 @@ namespace ChangeImageWindow
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select an image:";
 
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 labelFile.Text = openFileDialog.FileName;
                 bmp = (Bitmap)Image.FromFile(openFileDialog.FileName);
@@ -106,7 +106,7 @@ namespace ChangeImageWindow
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save image:";
 
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 processedBmp.Save(saveFileDialog.FileName);
 
@@ -119,7 +119,7 @@ namespace ChangeImageWindow
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select an image:";
 
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 processedBmp = (Bitmap)Image.FromFile(openFileDialog.FileName);
                 Rectangle bounds = panelProcessed.Bounds;
@@ -171,7 +171,7 @@ namespace ChangeImageWindow
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select a raw file:";
 
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 byte[] fileBytes = File.ReadAllBytes(openFileDialog.FileName);
                 logMessage("Raw file loaded: " + openFileDialog.FileName, true);
