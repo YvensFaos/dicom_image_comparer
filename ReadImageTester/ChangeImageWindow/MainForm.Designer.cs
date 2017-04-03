@@ -30,6 +30,8 @@
         {
             this.panelImage = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonRawAsGrayscale = new System.Windows.Forms.Button();
+            this.buttonReloadRaw = new System.Windows.Forms.Button();
             this.textBoxPixelPadding = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonLoadRaw = new System.Windows.Forms.Button();
@@ -48,8 +50,8 @@
             this.buttonOpen = new System.Windows.Forms.Button();
             this.panelProcessed = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonLoad = new System.Windows.Forms.Button();
             this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +66,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonRawAsGrayscale);
+            this.panel1.Controls.Add(this.buttonReloadRaw);
             this.panel1.Controls.Add(this.textBoxPixelPadding);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.buttonLoadRaw);
@@ -85,13 +89,33 @@
             this.panel1.Size = new System.Drawing.Size(301, 512);
             this.panel1.TabIndex = 0;
             // 
+            // buttonRawAsGrayscale
+            // 
+            this.buttonRawAsGrayscale.Location = new System.Drawing.Point(3, 391);
+            this.buttonRawAsGrayscale.Name = "buttonRawAsGrayscale";
+            this.buttonRawAsGrayscale.Size = new System.Drawing.Size(295, 34);
+            this.buttonRawAsGrayscale.TabIndex = 12;
+            this.buttonRawAsGrayscale.Text = "Load Raw as Grayscale";
+            this.buttonRawAsGrayscale.UseVisualStyleBackColor = true;
+            this.buttonRawAsGrayscale.Click += new System.EventHandler(this.buttonRawAsGrayscale_Click);
+            // 
+            // buttonReloadRaw
+            // 
+            this.buttonReloadRaw.Location = new System.Drawing.Point(3, 351);
+            this.buttonReloadRaw.Name = "buttonReloadRaw";
+            this.buttonReloadRaw.Size = new System.Drawing.Size(295, 34);
+            this.buttonReloadRaw.TabIndex = 11;
+            this.buttonReloadRaw.Text = "Reload Raw File";
+            this.buttonReloadRaw.UseVisualStyleBackColor = true;
+            this.buttonReloadRaw.Click += new System.EventHandler(this.buttonReloadRaw_Click);
+            // 
             // textBoxPixelPadding
             // 
             this.textBoxPixelPadding.Location = new System.Drawing.Point(98, 329);
             this.textBoxPixelPadding.Name = "textBoxPixelPadding";
             this.textBoxPixelPadding.Size = new System.Drawing.Size(200, 20);
             this.textBoxPixelPadding.TabIndex = 10;
-            this.textBoxPixelPadding.Text = "64036";
+            this.textBoxPixelPadding.Text = "-1500";
             // 
             // label5
             // 
@@ -247,16 +271,6 @@
             this.panel2.Size = new System.Drawing.Size(1337, 57);
             this.panel2.TabIndex = 2;
             // 
-            // buttonLoad
-            // 
-            this.buttonLoad.Location = new System.Drawing.Point(825, 3);
-            this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(253, 34);
-            this.buttonLoad.TabIndex = 11;
-            this.buttonLoad.Text = "Load Image";
-            this.buttonLoad.UseVisualStyleBackColor = true;
-            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
-            // 
             // textBoxLog
             // 
             this.textBoxLog.BackColor = System.Drawing.SystemColors.Info;
@@ -266,6 +280,16 @@
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxLog.Size = new System.Drawing.Size(816, 53);
             this.textBoxLog.TabIndex = 11;
+            // 
+            // buttonLoad
+            // 
+            this.buttonLoad.Location = new System.Drawing.Point(825, 0);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(253, 34);
+            this.buttonLoad.TabIndex = 11;
+            this.buttonLoad.Text = "Load Image";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
             // MainForm
             // 
@@ -311,6 +335,8 @@
         private System.Windows.Forms.TextBox textBoxPixelPadding;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxLog;
+        private System.Windows.Forms.Button buttonReloadRaw;
+        private System.Windows.Forms.Button buttonRawAsGrayscale;
     }
 }
 
