@@ -15,7 +15,7 @@ namespace ChangeImageWindow
         {
             InitializeComponent();
 
-            string defaultFile = @"C:\Users\Yvens\Desktop\preview (1).png";
+            string defaultFile = @"C:\Users\Yvens\Desktop\0-preview.png";
             try
             {
                 bmp = (Bitmap)Image.FromFile(defaultFile);
@@ -273,7 +273,6 @@ namespace ChangeImageWindow
 
                 Color color;
                 short value;
-                float normalized;
                 k = 0;
                 for (int i = 0; i < bmp.Height; i++)
                 {
@@ -282,18 +281,11 @@ namespace ChangeImageWindow
                         short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
                         k += 2;
 
-                        if (s == pixelPadding)
-                        {
-                            color = Color.FromArgb(0, 0, 0);
-                        }
-                        else
-                        {
-                            normalized = ((float)((float)(s - min) / (float)max)) * 255;
-                            value = (short)Math.Floor(normalized);
-                            value = (value > 255) ? (short)255 : value;
-                            value = (value < 0) ? (short)0 : value;
-                            color = Color.FromArgb(value, value, value);
-                        }
+                        float v = (s - min) * (255.0f / (max - min));
+                        value = (short)Math.Floor(v);
+                        value = (value > 255) ? (short)255 : value;
+                        value = (value < 0) ? (short)0 : value;
+                        color = Color.FromArgb(value, value, value);
 
                         processedBmp.SetPixel(j, i, color);
                     }
