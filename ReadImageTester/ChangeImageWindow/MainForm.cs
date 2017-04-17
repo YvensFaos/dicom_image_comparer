@@ -251,7 +251,6 @@ namespace ChangeImageWindow
 
                 int k = 0;
 
-                short pixelPadding = short.Parse(textBoxPixelPadding.Text);
                 short max = short.MinValue;
                 short min = short.MaxValue;
 
@@ -263,11 +262,8 @@ namespace ChangeImageWindow
                         short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
                         k += 2;
 
-                        if (s != pixelPadding)
-                        {
-                            max = Math.Max(max, s);
-                            min = Math.Min(min, s);
-                        }
+                        max = Math.Max(max, s);
+                        min = Math.Min(min, s);
                     }
                 }
 
@@ -319,9 +315,13 @@ namespace ChangeImageWindow
                 {
                     color = processedBmp.GetPixel(i, j);
                     intensity = color.R;
-                    intensity = intensity * 1 + 0; //slope & intercept
-                    intensity = (intensity - center0) / width0 + 0.5f;
-                    intensity *= 255;
+                    if(intensity != 0)
+                    {
+                        intensity = intensity * 1 + 0; //slope & intercept
+                        intensity = (intensity - center0) / width0 + 0.5f;
+                        intensity *= 255;
+                    }
+
                     value = (short)Math.Floor(intensity);
                     value = (value > 255) ? (short)255 : value;
                     value = (value < 0) ? (short)0 : value;
