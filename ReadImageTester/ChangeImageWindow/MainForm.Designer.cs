@@ -52,6 +52,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonLoad = new System.Windows.Forms.Button();
+            this.buttonApplyWindow = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonApplyWindow);
             this.panel1.Controls.Add(this.buttonRawAsGrayscale);
             this.panel1.Controls.Add(this.buttonReloadRaw);
             this.panel1.Controls.Add(this.textBoxPixelPadding);
@@ -291,6 +293,16 @@
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
+            // buttonApplyWindow
+            // 
+            this.buttonApplyWindow.Location = new System.Drawing.Point(3, 431);
+            this.buttonApplyWindow.Name = "buttonApplyWindow";
+            this.buttonApplyWindow.Size = new System.Drawing.Size(295, 34);
+            this.buttonApplyWindow.TabIndex = 13;
+            this.buttonApplyWindow.Text = "Apply Window";
+            this.buttonApplyWindow.UseVisualStyleBackColor = true;
+            this.buttonApplyWindow.Click += new System.EventHandler(this.buttonApplyWindow_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,6 +349,7 @@
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Button buttonReloadRaw;
         private System.Windows.Forms.Button buttonRawAsGrayscale;
+        private System.Windows.Forms.Button buttonApplyWindow;
     }
 }
 

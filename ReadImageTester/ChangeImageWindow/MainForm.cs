@@ -299,5 +299,44 @@ namespace ChangeImageWindow
                 buttonSaveProcessed.Enabled = true;
             }
         }
+
+        private void buttonApplyWindow_Click(object sender, EventArgs e)
+        {
+            int currentCenter = int.Parse(textBoxCenter.Text);
+            int currentWidth = int.Parse(textBoxWidth.Text);
+
+            float intensity;
+            float center0 = currentCenter - 0.5f;
+            float width0 = Math.Max(currentWidth, 1.0f);
+            Color color;
+            short value;
+
+            Bitmap nProcessedBmp = new Bitmap(processedBmp.Width, processedBmp.Height);
+
+            for (int i = 0; i < processedBmp.Width; i++)
+            {
+                for (int j = 0; j < processedBmp.Height; j++)
+                {
+                    color = processedBmp.GetPixel(i, j);
+                    intensity = color.R;
+                    intensity = intensity * 1 + 0; //slope & intercept
+                    intensity = (intensity - center0) / width0 + 0.5f;
+                    intensity *= 255;
+                    value = (short)Math.Floor(intensity);
+                    value = (value > 255) ? (short)255 : value;
+                    value = (value < 0) ? (short)0 : value;
+
+                    color = Color.FromArgb(value, value, value);
+                    nProcessedBmp.SetPixel(i, j, color);
+                }
+            }
+
+            Rectangle bounds = panelProcessed.Bounds;
+            panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
+            panelProcessed.BackgroundImage = nProcessedBmp;
+            buttonSaveProcessed.Enabled = true;
+
+            logMessage("Applied window center & width [" + currentCenter + ", " + currentWidth + "] processed!", true);
+        }
     }
 }
