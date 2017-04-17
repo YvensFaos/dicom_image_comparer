@@ -30,6 +30,7 @@
         {
             this.panelImage = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonApplyWindow = new System.Windows.Forms.Button();
             this.buttonRawAsGrayscale = new System.Windows.Forms.Button();
             this.buttonReloadRaw = new System.Windows.Forms.Button();
             this.buttonLoadRaw = new System.Windows.Forms.Button();
@@ -50,15 +51,18 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonLoad = new System.Windows.Forms.Button();
-            this.buttonApplyWindow = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelImage
             // 
             this.panelImage.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelImage.Location = new System.Drawing.Point(319, 12);
+            this.panelImage.Location = new System.Drawing.Point(319, 31);
             this.panelImage.Name = "panelImage";
             this.panelImage.Size = new System.Drawing.Size(512, 512);
             this.panelImage.TabIndex = 0;
@@ -84,8 +88,18 @@
             this.panel1.Controls.Add(this.buttonOpen);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(301, 512);
+            this.panel1.Size = new System.Drawing.Size(301, 525);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonApplyWindow
+            // 
+            this.buttonApplyWindow.Location = new System.Drawing.Point(3, 412);
+            this.buttonApplyWindow.Name = "buttonApplyWindow";
+            this.buttonApplyWindow.Size = new System.Drawing.Size(295, 34);
+            this.buttonApplyWindow.TabIndex = 11;
+            this.buttonApplyWindow.Text = "Apply Window";
+            this.buttonApplyWindow.UseVisualStyleBackColor = true;
+            this.buttonApplyWindow.Click += new System.EventHandler(this.buttonApplyWindow_Click);
             // 
             // buttonRawAsGrayscale
             // 
@@ -238,7 +252,7 @@
             // panelProcessed
             // 
             this.panelProcessed.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelProcessed.Location = new System.Drawing.Point(837, 11);
+            this.panelProcessed.Location = new System.Drawing.Point(837, 31);
             this.panelProcessed.Name = "panelProcessed";
             this.panelProcessed.Size = new System.Drawing.Size(512, 512);
             this.panelProcessed.TabIndex = 1;
@@ -247,46 +261,64 @@
             // 
             this.panel2.Controls.Add(this.textBoxLog);
             this.panel2.Controls.Add(this.buttonLoad);
-            this.panel2.Location = new System.Drawing.Point(12, 530);
+            this.panel2.Location = new System.Drawing.Point(12, 543);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1337, 57);
+            this.panel2.Size = new System.Drawing.Size(1337, 55);
             this.panel2.TabIndex = 2;
             // 
             // textBoxLog
             // 
             this.textBoxLog.BackColor = System.Drawing.SystemColors.Info;
-            this.textBoxLog.Location = new System.Drawing.Point(3, 1);
+            this.textBoxLog.Location = new System.Drawing.Point(0, 3);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxLog.Size = new System.Drawing.Size(816, 53);
+            this.textBoxLog.Size = new System.Drawing.Size(816, 49);
             this.textBoxLog.TabIndex = 11;
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(825, 0);
+            this.buttonLoad.Location = new System.Drawing.Point(825, 3);
             this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(253, 34);
+            this.buttonLoad.Size = new System.Drawing.Size(253, 38);
             this.buttonLoad.TabIndex = 12;
             this.buttonLoad.Text = "Load Image";
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
-            // buttonApplyWindow
+            // panel3
             // 
-            this.buttonApplyWindow.Location = new System.Drawing.Point(3, 412);
-            this.buttonApplyWindow.Name = "buttonApplyWindow";
-            this.buttonApplyWindow.Size = new System.Drawing.Size(295, 34);
-            this.buttonApplyWindow.TabIndex = 11;
-            this.buttonApplyWindow.Text = "Apply Window";
-            this.buttonApplyWindow.UseVisualStyleBackColor = true;
-            this.buttonApplyWindow.Click += new System.EventHandler(this.buttonApplyWindow_Click);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Location = new System.Drawing.Point(319, 12);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1030, 19);
+            this.panel3.TabIndex = 3;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 5);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Loaded Image";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(515, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Raw File";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1358, 589);
+            this.ClientSize = new System.Drawing.Size(1358, 600);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelProcessed);
             this.Controls.Add(this.panel1);
@@ -298,6 +330,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -327,6 +361,9 @@
         private System.Windows.Forms.Button buttonReloadRaw;
         private System.Windows.Forms.Button buttonRawAsGrayscale;
         private System.Windows.Forms.Button buttonApplyWindow;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 

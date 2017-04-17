@@ -315,12 +315,9 @@ namespace ChangeImageWindow
                 {
                     color = processedBmp.GetPixel(i, j);
                     intensity = color.R;
-                    if(intensity != 0)
-                    {
-                        intensity = intensity * 1 + 0; //slope & intercept
-                        intensity = (intensity - center0) / width0 + 0.5f;
-                        intensity *= 255;
-                    }
+                    intensity = intensity * 1 + 0; //slope & intercept
+                    intensity = (intensity - center0) / width0 + 0.5f;
+                    intensity *= 255;
 
                     value = (short)Math.Floor(intensity);
                     value = (value > 255) ? (short)255 : value;
