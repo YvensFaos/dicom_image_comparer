@@ -15,7 +15,7 @@ namespace ChangeImageWindow
         {
             InitializeComponent();
 
-            string defaultFile = @"C:\Users\Yvens\Desktop\preview (1).png";
+            string defaultFile = @"C:\Users\Yvens\Desktop\0-preview.png";
             try
             {
                 bmp = (Bitmap)Image.FromFile(defaultFile);
@@ -251,7 +251,6 @@ namespace ChangeImageWindow
 
                 int k = 0;
 
-                short pixelPadding = short.Parse(textBoxPixelPadding.Text);
                 short max = short.MinValue;
                 short min = short.MaxValue;
 
@@ -263,17 +262,13 @@ namespace ChangeImageWindow
                         short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
                         k += 2;
 
-                        if (s != pixelPadding)
-                        {
-                            max = Math.Max(max, s);
-                            min = Math.Min(min, s);
-                        }
+                        max = Math.Max(max, s);
+                        min = Math.Min(min, s);
                     }
                 }
 
                 Color color;
                 short value;
-                float normalized;
                 k = 0;
                 for (int i = 0; i < bmp.Height; i++)
                 {
@@ -282,18 +277,11 @@ namespace ChangeImageWindow
                         short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
                         k += 2;
 
-                        if (s == pixelPadding)
-                        {
-                            color = Color.FromArgb(0, 0, 0);
-                        }
-                        else
-                        {
-                            normalized = ((float)((float)(s - min) / (float)max)) * 255;
-                            value = (short)Math.Floor(normalized);
-                            value = (value > 255) ? (short)255 : value;
-                            value = (value < 0) ? (short)0 : value;
-                            color = Color.FromArgb(value, value, value);
-                        }
+                        float v = (s - min) * (255.0f / (max - min));
+                        value = (short)Math.Floor(v);
+                        value = (value > 255) ? (short)255 : value;
+                        value = (value < 0) ? (short)0 : value;
+                        color = Color.FromArgb(value, value, value);
 
                         processedBmp.SetPixel(j, i, color);
                     }
@@ -306,6 +294,46 @@ namespace ChangeImageWindow
                 logMessage("Raw loaded as grayscale. Max and Min = " + max.ToString() + " " + min.ToString(), true);
                 buttonSaveProcessed.Enabled = true;
             }
+        }
+
+        private void buttonApplyWindow_Click(object sender, EventArgs e)
+        {
+            int currentCenter = int.Parse(textBoxCenter.Text);
+            int currentWidth = int.Parse(textBoxWidth.Text);
+
+            float intensity;
+            float center0 = currentCenter - 0.5f;
+            float width0 = Math.Max(currentWidth, 1.0f);
+            Color color;
+            short value;
+
+            Bitmap nProcessedBmp = new Bitmap(processedBmp.Width, processedBmp.Height);
+
+            for (int i = 0; i < processedBmp.Width; i++)
+            {
+                for (int j = 0; j < processedBmp.Height; j++)
+                {
+                    color = processedBmp.GetPixel(i, j);
+                    intensity = color.R;
+                    intensity = intensity * 1 + 0; //slope & intercept
+                    intensity = (intensity - center0) / width0 + 0.5f;
+                    intensity *= 255;
+
+                    value = (short)Math.Floor(intensity);
+                    value = (value > 255) ? (short)255 : value;
+                    value = (value < 0) ? (short)0 : value;
+
+                    color = Color.FromArgb(value, value, value);
+                    nProcessedBmp.SetPixel(i, j, color);
+                }
+            }
+
+            Rectangle bounds = panelProcessed.Bounds;
+            panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
+            panelProcessed.BackgroundImage = nProcessedBmp;
+            buttonSaveProcessed.Enabled = true;
+
+            logMessage("Applied window center & width [" + currentCenter + ", " + currentWidth + "] processed!", true);
         }
     }
 }
