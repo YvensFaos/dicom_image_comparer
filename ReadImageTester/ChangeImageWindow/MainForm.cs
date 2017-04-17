@@ -94,7 +94,7 @@ namespace ChangeImageWindow
             {
                 return 0;
             }
-            else if (c > wMax)
+            else if (c >= wMax)
             {
                 return 255;
             }
