@@ -363,11 +363,13 @@ namespace ChangeImageWindow
                     }
                 }
 
+                logMessage("Max and Min = " + max.ToString() + " " + min.ToString(), true);
+
                 float center = 0.5f * (min + max - 1);
                 float width = max - min + 1;
 
-                float center0 = center;// currentCenter - 0.5f;
-                float width0 = width; //Math.Max(currentWidth, 1.0f);
+                float center0 = center;
+                float width0 = width;
                 Color color;
 
                 var wMin = center0 - 0.5 - (width0 - 1) / 2;
@@ -389,6 +391,8 @@ namespace ChangeImageWindow
                         calculateColor(s, wMin, wMax, center0, width0));
 
                         nProcessedBmp.SetPixel(j, i, color);
+
+                        //short test = (short) (((width0 - 1.0f) * (color.R - 127.5f) + 255.0f * (center0 + 0.5f)) / 255.0f);
                     }
                 }
 
