@@ -52,8 +52,9 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.buttonLoadImageAsBinary = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -69,6 +70,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonLoadImageAsBinary);
             this.panel1.Controls.Add(this.buttonApplyWindow);
             this.panel1.Controls.Add(this.buttonRawAsGrayscale);
             this.panel1.Controls.Add(this.buttonReloadRaw);
@@ -295,6 +297,15 @@
             this.panel3.Size = new System.Drawing.Size(1030, 19);
             this.panel3.TabIndex = 3;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(515, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Raw File";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -304,14 +315,15 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Loaded Image";
             // 
-            // label6
+            // buttonLoadImageAsBinary
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(515, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Raw File";
+            this.buttonLoadImageAsBinary.Location = new System.Drawing.Point(3, 452);
+            this.buttonLoadImageAsBinary.Name = "buttonLoadImageAsBinary";
+            this.buttonLoadImageAsBinary.Size = new System.Drawing.Size(295, 34);
+            this.buttonLoadImageAsBinary.TabIndex = 12;
+            this.buttonLoadImageAsBinary.Text = "Load Image as Binary";
+            this.buttonLoadImageAsBinary.UseVisualStyleBackColor = true;
+            this.buttonLoadImageAsBinary.Click += new System.EventHandler(this.buttonLoadImageAsBinary_Click);
             // 
             // MainForm
             // 
@@ -364,6 +376,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonLoadImageAsBinary;
     }
 }
 

@@ -335,5 +335,70 @@ namespace ChangeImageWindow
 
             logMessage("Applied window center & width [" + currentCenter + ", " + currentWidth + "] processed!", true);
         }
+
+        private void buttonLoadImageAsBinary_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a image file:";
+
+            int k = 0;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileBytes = File.ReadAllBytes(openFileDialog.FileName);
+                logMessage("Raw file loaded: " + openFileDialog.FileName, true);
+
+                short max = short.MinValue;
+                short min = short.MaxValue;
+
+                processedBmp = new Bitmap(bmp.Width, bmp.Height);
+                for (int i = 0; i < bmp.Height; i++)
+                {
+                    for (int j = 0; j < bmp.Width; j++)
+                    {
+                        short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
+                        k += 2;
+
+                        max = Math.Max(max, s);
+                        min = Math.Min(min, s);
+                    }
+                }
+
+                float center = 0.5f * (min + max - 1);
+                float width = max - min + 1;
+
+                float center0 = center;// currentCenter - 0.5f;
+                float width0 = width; //Math.Max(currentWidth, 1.0f);
+                Color color;
+
+                var wMin = center0 - 0.5 - (width0 - 1) / 2;
+                var wMax = center0 - 0.5 + (width0 - 1) / 2;
+
+                Bitmap nProcessedBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                k = 0;
+                for (int i = 0; i < nProcessedBmp.Height; i++)
+                {
+                    for (int j = 0; j < nProcessedBmp.Width; j++)
+                    {
+                        short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
+                        k += 2;
+
+                        color = Color.FromArgb(
+                        calculateColor(s, wMin, wMax, center0, width0),
+                        calculateColor(s, wMin, wMax, center0, width0),
+                        calculateColor(s, wMin, wMax, center0, width0));
+
+                        nProcessedBmp.SetPixel(j, i, color);
+                    }
+                }
+
+                Rectangle bounds = panelProcessed.Bounds;
+                panelProcessed.SetBounds(bounds.X, bounds.Y, processedBmp.Width, processedBmp.Height);
+                panelProcessed.BackgroundImage = nProcessedBmp;
+                buttonSaveProcessed.Enabled = true;
+
+                logMessage("Applied window center & width [" + center0 + ", " + width0 + "] processed!", true);
+            }
+        }
     }
 }
