@@ -196,8 +196,8 @@ namespace ChangeImageWindow
             int currentCenter = int.Parse(textBoxCenter.Text);
             int currentWidth = int.Parse(textBoxWidth.Text);
 
-            var wMin = currentCenter - 0.5 - (currentWidth - 1) / 2;
-            var wMax = currentCenter - 0.5 + (currentWidth - 1) / 2;
+            var wMin = currentCenter - 0.5 - (currentWidth - 1) / 2.0;
+            var wMax = currentCenter - 0.5 + (currentWidth - 1) / 2.0;
             Color color;
 
             processedBmp = new Bitmap(bmp.Width, bmp.Height);
@@ -209,11 +209,9 @@ namespace ChangeImageWindow
                     short s = (short)((fileBytes[k + 1] << 8) | fileBytes[k]);
                     k += 2;
 
-                    color = Color.FromArgb(
-                    calculateColor(s, wMin, wMax, currentCenter, currentWidth),
-                    calculateColor(s, wMin, wMax, currentCenter, currentWidth),
-                    calculateColor(s, wMin, wMax, currentCenter, currentWidth));
+                    byte calculated = calculateColor(s, wMin, wMax, currentCenter, currentWidth);
 
+                    color = Color.FromArgb(calculated, calculated, calculated);
                     processedBmp.SetPixel(j, i, color);
                 }
             }
